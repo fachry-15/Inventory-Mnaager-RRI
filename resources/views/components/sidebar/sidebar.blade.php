@@ -35,12 +35,12 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
-                        <i class="fas fa-layer-group"></i>
-                        <span>Kategori Barang</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item {{ request()->is('kategori*') ? 'active' : '' }}">
+                        <a href="{{ route('kategori') }}" class='sidebar-link'>
+                            <i class="fas fa-layer-group"></i>
+                            <span>Kategori Barang</span>
+                        </a>
+                    </li>
 
                 <li class="sidebar-item  ">
                     <a href="form-layout.html" class='sidebar-link'>

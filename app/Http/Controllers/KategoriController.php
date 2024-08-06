@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ruangan;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
-class RuanganController extends Controller
+class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class RuanganController extends Controller
      */
     public function index()
     {
-        $ruangans = ruangan::all();
-        return view('ruangan', compact('ruangans'));
+        $kategori = Kategori::all();
+        return view('kategori', compact('kategori'));
     }
 
     /**
@@ -37,35 +36,7 @@ class RuanganController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $data = $request->all();
-
-            // Validate the request data
-            $validatedData = $request->validate([
-                'kode_ruang' => 'nullable|string',
-                'nama_ruang' => 'required|string|max:255',
-                'lantai' => 'required|integer',
-
-                // Add more validation rules for other fields if needed
-            ]);
-
-            // Create a new Ruangan instance
-            $ruangan = new ruangan();
-            $ruangan->kode_ruang = $validatedData['kode_ruang'];
-            $ruangan->nama_ruang = $validatedData['nama_ruang'];
-            $ruangan->lantai = $validatedData['lantai'];
-
-            // Set other properties of the Ruangan instance if needed
-
-            // Save the Ruangan instance to the database
-            $ruangan->save();
-
-            // Redirect to the index page or show a success message
-            return redirect()->route('dashboard')->with('success', 'Ruangan created successfully');
-        } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
-            Log::error($e->getMessage());
-            return back()->with('error', 'Mohon Maaf, stok barang tidak mencukupi');
-        }
+        //
     }
 
     /**

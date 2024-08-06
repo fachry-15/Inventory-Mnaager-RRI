@@ -52,40 +52,43 @@
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalCenter">
-                                Tambah Ruangan
-                            </button>
-
-
+                            data-bs-target="#exampleModalCenter">
+                            Tambah Barang
+                             </button>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
-                                        <th>Kode Ruangan</th>
-                                        <th>Nama Ruangan</th>
-                                        <th>Lantai</th>
+                                        <th>ID </th>
+                                        <th>Nama </th>
+                                        <th>Jumlah</th>
+                                        <th>Kategori </th>
+                                        <th>Ruangan</th>        
+                                        <th>Tanggal Masuk</th>
+                                        <th>Tanggal Maintenance</th>
+                                        <th>Gambar</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ruangans as $item)
-                                    <tr>
-                                        <td>{{ $item->kode_ruang }}</td>
-                                        <td>{{ $item->nama_ruang }}</td>
-                                        <td>{{ $item->lantai }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalCenter">
-                                                Edit
-                                            </button>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalCenter">
-                                                Hapus
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                    @foreach ($barangs as $item)
+                            <tr>
+                              
+                                <td>{{$item->kode_barang}}</td>
+                                <td>{{$item->nama_barang}}</td>
+                                <td>{{$item->jumlah_barang}}</td>
+                                <td>{{$item->kategori_barang}}</td>
+                                <td>{{$item->ruangan_id}}</td>
+                                <td>{{$item->tanggal_masuk}}</td>
+                                <td>{{$item->tanggal_maintenace}}</td>
+                                <td><a href="{{ asset('images/'.$item->bukti_gambar) }}" class="btn btn-success" data-lightbox="image-1">Lihat Gambar</a></td>
+                                <td>
+                                    <a href="#" class="btn btn-warning">Edit</a>
+                                    <a href="#" class="btn btn-danger">Hapus</a>
+                                </td>
+                            </tr>
+                            @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -96,5 +99,5 @@
         </div>
     </div>
 
-    @include('components.Forms.tambahruang')
+    @include('components.Forms.tambahbarang')
 @endsection
