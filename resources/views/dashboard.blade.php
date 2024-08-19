@@ -1,101 +1,258 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.admin')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+@section('content')
+<body>
+    <div id="app">
+      @include('components.sidebar.sidebar')
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Halaman Utama</h3>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-9">
+                        <div class="row">
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="iconly-boldShow"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Barang</h6>
+                                                <h6 class="font-extrabold mb-0">112</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon blue">
+                                                    <i class="iconly-boldProfile"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Kategori</h6>
+                                                <h6 class="font-extrabold mb-0">10</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon green">
+                                                    <i class="iconly-boldAdd-User"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Ruangan</h6>
+                                                <h6 class="font-extrabold mb-0">8</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon red">
+                                                    <i class="iconly-boldBookmark"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Booking</h6>
+                                                <h6 class="font-extrabold mb-0">112</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                          <table class="table table-striped" id="table1">
+                              <thead>
+                                <tr>
+                                  <th>ID </th>
+                                  <th>Nama </th>
+                                  <th>Jumlah </th>
+                                  <th>Satuan </th>
+                                  <th>Kategori </th>
+                                  <th>Ruangan</th>
+                                  <th>Pj</th>
+                                  <th>Gambar</th>
+                                  <th>Tanggal Masuk</th>
+                                  <th>Tanggal Selesai</th>
+                                  <th>Aksi</th>
+                              </tr>
+                              </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>EDS324</td>
+                                      <td>laptop ASUS</td>
+                                      <td>10</td>
+                                      <td>unit</td>
+                                      <td>Laptop</td>
+                                      <td>TMB</td>
+                                      <td>Desi S.Tr</td>
+                                      <td>-</td>
+                                      <td>10 januari 2025</td>
+                                      <td>2027</td>
+                                      <td>
+                                          <button class="btn btn-success">edit</button>
+                                      </td>
+                                  </tr>
+                                  </tbody>
+                          </table>
+                      </div>
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>ID </th>
+                                        <th>Nama </th>
+                                        <th>Jumlah </th>
+                                        <th>Satuan </th>
+                                        <th>Kategori </th>
+                                        <th>Ruangan</th>
+                                        <th>Pj</th>
+                                        <th>Gambar</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Tanggal Selesai</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    <tr>
+                                        <td>EDS324</td>
+                                        <td>laptop ASUS</td>
+                                        <td>10</td>
+                                        <td>unit</td>
+                                        <td>Laptop</td>
+                                        <td>TMB</td>
+                                        <td>Desi S.Tr</td>
+                                        <td>-</td>
+                                        <td>10 januari 2025</td>
+                                        <td>2027</td>
+                                        <td>
+                                            <button class="btn btn-success">edit</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>EDS324</td>
+                                        <td>laptop ASUS</td>
+                                        <td>10</td>
+                                        <td>unit</td>
+                                        <td>Laptop</td>
+                                        <td>TMB</td>
+                                        <td>Jono S.E</td>
+                                        <td>-</td>
+                                        <td>10 januari 2025</td>
+                                        <td>2027</td>
+                                        <td>
+                                            <button class="btn btn-success">edit</button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-lg-3">
+                        <div class="card">
+                            <div class="card-body py-4 px-5">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar avatar-xl">
+                                        <img src="assets/images/faces/1.jpg" alt="Face 1">
+                                    </div>
+                                    <div class="ms-3 name">
+                                        <h5 class="font-bold">{{ Auth::user()->name }}</h5>
+                                        <h6 class="text-muted mb-0">{{ Auth::user()->email }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                            <tr>
+                                <th>Kode Ruangan</th>
+                                <th>Nama Ruangan</th>
+                                <th>Lantai</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Graiden</td>
+                                    <td>Teknik Media Baru</td>
+                                    <td>1</td>
+                                    <td>
+                                        <span class="badge bg-success">Edit</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Graiden</td>
+                                    <td>Teknik Media Baru</td>
+                                    <td>1</td>
+                                    <td>
+                                        <span class="badge bg-success">Edit</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PPS</td>
+                                    <td>Penyiaran Berita</td>
+                                    <td>3</td>
+                                    <td>
+                                        <span class="badge bg-success">Edit</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PPS</td>
+                                    <td>Penyiaran Berita</td>
+                                    <td>3</td>
+                                    <td>
+                                        <span class="badge bg-success">Edit</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
 
-<form action="{{ route('ruangan.store') }}" method="POST">
-    @csrf
-    <div class="space-y-12 bg-white px-4 py-4">
-      <div class="border-b border-gray-900/10 pb-12">
-        <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
-        <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
-  
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nama Ruangan</label>
-            <div class="mt-2">
-              <input type="text" name="nama" placeholder="Masukkan Nama Ruangan" id="nama_ruangan" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-          </div>
-  
-          <div class="sm:col-span-3">
-            <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Kode Ruangan</label>
-            <div class="mt-2">
-              <input type="text" name="kode" id="kode-ruangan" placeholder="Masukkan Kode Ruangan" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-          </div>
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2021 &copy; Mazer</p>
+                    </div>
+                    <div class="float-end">
+                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                                href="http://ahmadsaugi.com">nisa cans</a></p>
+                    </div>
+                </div>
+            </footer>
         </div>
-      </div>
-  
-    <div class="mt-6 flex items-center justify-end gap-x-6 bg-white px-4 py-4">
-      <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Batal</button>
-      <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan</button>
     </div>
-    </div>
-</form>
- 
-<form action="{{ route('ruangan.store') }}" method="POST">
-    @csrf
-    <div class="space-y-12 bg-white px-4 py-4">
-      <div class="border-b border-gray-900/10 pb-12">
-        <h2 class="text-base font-semibold leading-7 text-gray-900">Nama Barang</h2>
-        <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
   
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nama Barang</label>
-            <div class="mt-2">
-              <input type="text" name="nama" placeholder="Masukkan Nama Barang" id="nama_barang" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-          </div>
-  
-          <div class="sm:col-span-3">
-            <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Kategori Barang</label>
-            <div class="mt-2">
-              <input type="text" name="kategori" id="kategori-barang" placeholder="Masukkan Kategori Barang" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div class="sm:col-span-3">
-              <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Kode Barang</label>
-              <div class="mt-2">
-                <input type="text" name="kode" placeholder="Masukkan Kode Barang" id="kode_barang" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <small class="text-green-600">Kode tersedia</small>
-              </div>
-            </div>
-    
-            <div class="sm:col-span-3">
-              <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Kategori Barang</label>
-              <div class="mt-2">
-                <select id="kategori" name="kategori" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                    <option value="belum memilih">Pilih Kategori</option>
-                    <option value="2">Elektronik</option>
-                </select>
-              </div>
-            </div>
-          </div>
-      </div>
-  
-    <div class="mt-6 flex items-center justify-end gap-x-6 bg-white px-4 py-4">
-      <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Batal</button>
-      <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan</button>
-    </div>
-    </div>
-</form>
-
-    
-</x-app-layout>
+    @endsection

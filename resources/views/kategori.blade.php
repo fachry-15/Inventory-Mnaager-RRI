@@ -30,7 +30,7 @@
                 </div>
                 <!-- Modal Sizes start -->
             
-                <button type="button" class="btn btn-outline-secondary mt-3" data-bs-toggle="modal"
+                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
                 data-bs-target="#tambahKategoriModal">
                 Tambah Kategori
             </button>
@@ -47,18 +47,17 @@
                     </div>
                     <div class="modal-body">
                         <!-- Form content for adding a category -->
-                        <form>
+                        <form id="kategoriForm" method="POST" action="{{ route('kategori.store') }}">
+                            @csrf
                             <div class="form-group">
                                 <label for="kategoriName">Nama Kategori</label>
-                                <input type="text" class="form-control" id="kategoriName"
-                                    placeholder="Masukkan nama kategori">
+                                <input type="text" class="form-control" id="kategoriName" name="nama_kategori" placeholder="Masukkan nama kategori" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal
-                        <button type="button" class="btn btn-primary">Simpan</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -67,23 +66,27 @@
 
                     </div>
                 </section>
-                <section id="basic-modals">
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Kabel</h4>
-                                </div>
-                                <div class="card-body">
-                                    <!-- Button trigger for basic modal -->
-                                    <a class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#default">
-                                        Lihat Detail
-                                    </a>
-                                </div>
+                <div class="row mt-4">
+                    @foreach ($kategori as $item)
+                    <div class="col-sm-6">
+                        <div class="card border shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$item->nama_kategori}}</h5>
+                                <p class="card-text">Klik tombol di bawah ini untuk melihat lebih banyak informasi</p>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </a>
+                                <a href="#" class="btn btn-warning">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-danger">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
                             </div>
-                        </div>                    
+                        </div>
                     </div>
-                </section>
+                    @endforeach
+                </div>
                 <!-- Form and scrolling Components end -->
             </div>
 

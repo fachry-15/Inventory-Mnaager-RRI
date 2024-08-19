@@ -9,5 +9,16 @@ class barang extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_barang', 'kode_barang', 'jumlah_barang', 'satuan_barang', 'kategori_barang', 'ruangan_id', 'bukti_gambar', 'tanggal_masuk', 'tanggal_maintenace'];
+    protected $fillable = ['nama_barang', 'kode_barang', 'kategori_barang', 'ruangan_id', 'bukti_gambar', 'tanggal_masuk', 'tanggal_maintenace'];
+
+
+    public function ruangans()
+    {
+        return $this->belongsTo(ruangan::class, 'ruangan_id', 'id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
+    }
 }

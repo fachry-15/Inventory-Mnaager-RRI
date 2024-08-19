@@ -99,7 +99,29 @@ class RuanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            // Validasi data
+            $request->validate([
+                'kode_ruang' => 'required|string|max:255',
+                'nama_ruang' => 'required|string|max:255',
+                'lantai' => 'required|integer',
+            ]);
+
+            // Temukan data berdasarkan ID
+            $ruang = ruangan::findOrFail($id);
+
+            // Update data
+            $ruang->kode_ruang = $request->kode_ruang;
+            $ruang->nama_ruang = $request->nama_ruang;
+            $ruang->lantai = $request->lantai;
+            $ruang->save();
+
+            // Redirect atau response
+            return redirect()->back()->with('success', 'Data ruangan berhasil diperbarui.');
+        } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
+            Log::error($e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan saat memperbarui data ruangan.');
+        }
     }
 
     /**

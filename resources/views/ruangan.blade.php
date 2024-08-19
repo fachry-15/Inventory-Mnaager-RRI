@@ -76,8 +76,8 @@
                                         <td>{{ $item->lantai }}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalCenter">
-                                                Edit
+                                                data-bs-target="#updateModal-{{ $item->id }}">
+                                                <i class="far fa-edit"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModalCenter">
@@ -97,4 +97,5 @@
     </div>
 
     @include('components.Forms.tambahruang')
+    @include('components.Forms.updateruang')
 @endsection

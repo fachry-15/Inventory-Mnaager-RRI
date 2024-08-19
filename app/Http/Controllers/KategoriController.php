@@ -36,7 +36,18 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi data
+        $validatedData = $request->validate([
+            'nama_kategori' => 'required|string|max:255',
+        ]);
+
+        // Simpan data ke database
+        $kategori = new Kategori;
+        $kategori->nama_kategori = $validatedData['nama_kategori'];
+        $kategori->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     /**
