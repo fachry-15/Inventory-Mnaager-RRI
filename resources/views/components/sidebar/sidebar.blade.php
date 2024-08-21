@@ -56,6 +56,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item {{ request()->is('pindahbarang*') ? 'active' : '' }} ">
+                    <a href="{{ route('pindahbarang') }}" class='sidebar-link'>
+                        <i class="fas fa-user"></i>
+                        <span>Akun Karyawan</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-title">Akun</li>
 
                 <li class="sidebar-item  ">

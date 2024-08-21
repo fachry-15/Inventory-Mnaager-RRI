@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KaryawanControllers;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PengambilanControllers;
 use App\Http\Controllers\PindahBarangController;
@@ -44,6 +45,7 @@ Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 Route::get('/pindahbarang', [PindahBarangController::class, 'index'])->name('pindahbarang');
 Route::get('/pemindahan', [PengambilanControllers::class, 'index'])->name('pemindahan');
 Route::get('/pemindahanmanual', [PengambilanControllers::class, 'pengambilanmanual'])->name('pemindahanmanual');
+Route::get('/karyawan', [KaryawanControllers::class, 'index'])->name('karyawan');
 // routes/web.php
 Route::get('/generate-qrcode/{kode}', [BarangController::class, 'generateQRCode']);
 

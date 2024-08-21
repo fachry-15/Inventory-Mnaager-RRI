@@ -33,7 +33,7 @@
                 <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
                 data-bs-target="#tambahKategoriModal">
                 Tambah Kategori
-            </button>
+                 </button>
             <!-- Modal -->
             <div class="modal fade" id="tambahKategoriModal" tabindex="-1" role="dialog"
             aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
