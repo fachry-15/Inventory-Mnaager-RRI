@@ -56,8 +56,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->is('pindahbarang*') ? 'active' : '' }} ">
-                    <a href="{{ route('pindahbarang') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->is('karyawan*') ? 'active' : '' }} ">
+                    <a href="{{ route('karyawan') }}" class='sidebar-link'>
                         <i class="fas fa-user"></i>
                         <span>Akun Karyawan</span>
                     </a>
