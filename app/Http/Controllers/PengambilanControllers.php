@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
+use App\Models\barang;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
-class KategoriController extends Controller
+class PengambilanControllers extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,13 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::all();
-        return view('kategori', compact('kategori'));
+        return view('pengambilan');
+    }
+
+    public function pengambilanmanual()
+    {
+        $barangs = barang::all();
+        return view('pengambilanmanual', compact('barangs'));
     }
 
     /**
@@ -24,10 +29,7 @@ class KategoriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -39,13 +41,14 @@ class KategoriController extends Controller
     {
         // Validasi data
         $validatedData = $request->validate([
-            'nama_kategori' => 'required|string|max:255',
+            'kode_barang' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
         ]);
 
         // Simpan data ke database
-        $kategori = new Kategori;
-        $kategori->nama_kategori = $validatedData['nama_kategori'];
-        $kategori->save();
+        $peminjaman = new Peminjaman();
+        $peminjaman->barang_id = $validatedData['kode_barang'];
+        $peminjaman->save();
 
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Kategori berhasil ditambahkan.');
@@ -82,29 +85,8 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            // Validasi data
-            $request->validate([
-                'nama_kategori' => 'required|string|max:255',
-                'nama_ruang' => 'required|string|max:255',
-                'lantai' => 'required|integer',
-            ]);
-
-            // Temukan data berdasarkan ID
-            $kategori = Kategori::findOrFail($id);
-
-            // Update data
-            $kategori->nama_kategori = $request->nama_kategori;
-            $kategori->save();
-
-            // Redirect atau response
-            return redirect()->back()->with('success', 'Data Kategori berhasil diperbarui.');
-        } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
-            Log::error($e->getMessage());
-            return back()->with('error', 'Terjadi kesalahan saat memperbarui data kategori.');
-        }
+        //
     }
-
 
     /**
      * Remove the specified resource from storage.

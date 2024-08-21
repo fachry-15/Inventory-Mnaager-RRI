@@ -76,10 +76,11 @@
                                 <a href="#" class="btn btn-primary">
                                     <i class="fas fa-ellipsis-h"></i>
                                 </a>
-                                <a href="#" class="btn btn-warning">
+                                <button data-bs-toggle="modal"
+                                data-bs-target="#editKategoriModal-{{$item->id}}" class="btn btn-warning">
                                     <i class="far fa-edit"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger">
+                                </button>
+                                <a class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                             </div>
@@ -89,6 +90,32 @@
                 </div>
                 <!-- Form and scrolling Components end -->
             </div>
+
+            @foreach ($kategori as $item)
+            <div class="modal fade" id="editKategoriModal-{{$item->id}}" tabindex="-1" aria-labelledby="editKategoriModalLabel-{{$item->id}}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editKategoriModalLabel-{{$item->id}}">Edit Kategori</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Form untuk mengedit kategori -->
+                            <form action="{{ route('update.ruang', $item->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="mb-3">
+                                    <label for="namaKategori-{{$item->id}}" class="form-label">Nama Kategori</label>
+                                    <input type="text" class="form-control" id="namaKategori-{{$item->id}}" name="nama_kategori" value="{{ $item->nama_kategori }}" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        <!-- End of Modal -->
 
             @include('components.footer.footer')
         </div>

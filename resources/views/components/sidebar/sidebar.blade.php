@@ -42,8 +42,8 @@
                         </a>
                     </li>
 
-                <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
+                <li class="sidebar-item  {{ request()->is('pemindahan*') ? 'active' : '' }}">
+                    <a href="{{ route('pemindahan') }}" class='sidebar-link'>
                         <i class="fas fa-briefcase"></i>
                         <span>Pengambilan Barang</span>
                     </a>

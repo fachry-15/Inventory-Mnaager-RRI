@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class KategoriController extends Controller
 {
@@ -70,8 +69,16 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Kategori::find($id);
+
+        if ($item) {
+            return response()->json($item);
+        } else {
+            return response()->json(['message' => 'Item not found'], 404);
+        }
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -82,29 +89,17 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            // Validasi data
-            $request->validate([
-                'nama_kategori' => 'required|string|max:255',
-                'nama_ruang' => 'required|string|max:255',
-                'lantai' => 'required|integer',
-            ]);
+        $item = Kategori::find($id);
 
-            // Temukan data berdasarkan ID
-            $kategori = Kategori::findOrFail($id);
+        if ($item) {
+            $item->name = $request->input('name');
+            $item->save();
 
-            // Update data
-            $kategori->nama_kategori = $request->nama_kategori;
-            $kategori->save();
-
-            // Redirect atau response
-            return redirect()->back()->with('success', 'Data Kategori berhasil diperbarui.');
-        } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
-            Log::error($e->getMessage());
-            return back()->with('error', 'Terjadi kesalahan saat memperbarui data kategori.');
+            return response()->json(['message' => 'Item updated successfully']);
+        } else {
+            return response()->json(['message' => 'Item not found'], 404);
         }
     }
-
 
     /**
      * Remove the specified resource from storage.

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PengambilanControllers;
 use App\Http\Controllers\PindahBarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuanganController;
@@ -41,6 +42,8 @@ Route::post('/barang', [BarangController::class, 'store'])->name('barang.store')
 Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 Route::get('/pindahbarang', [PindahBarangController::class, 'index'])->name('pindahbarang');
+Route::get('/pemindahan', [PengambilanControllers::class, 'index'])->name('pemindahan');
+Route::get('/pemindahanmanual', [PengambilanControllers::class, 'pengambilanmanual'])->name('pemindahanmanual');
 // routes/web.php
 Route::get('/generate-qrcode/{kode}', [BarangController::class, 'generateQRCode']);
 
