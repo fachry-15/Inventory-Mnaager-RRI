@@ -33,9 +33,8 @@
                 <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
                 data-bs-target="#tambahKategoriModal">
                 Tambah Kategori
-                </button>
-            
-                <!-- Modal -->
+            </button>
+            <!-- Modal -->
             <div class="modal fade" id="tambahKategoriModal" tabindex="-1" role="dialog"
             aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -77,11 +76,6 @@
                                 <a href="#" class="btn btn-primary">
                                     <i class="fas fa-ellipsis-h"></i>
                                 </a>
-                                <button data-bs-toggle="modal"
-                                data-bs-target="#editKategoriModal-{{$item->id}}" class="btn btn-warning">
-                                    <i class="far fa-edit"></i>
-                                </button>
-                                <a class="btn btn-danger">
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editKategoriModal-{{ $item->id }}">
                                     <i class="far fa-edit"></i>
                                 </button>
@@ -89,78 +83,48 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">
-                                <button data-bs-toggle="modal"
-                                data-bs-target="#editKategoriModal-{{$item->id}}" class="btn btn-warning">
-                                    <i class="far fa-edit"></i>
-                                </button>
-                                <a class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-                                </form>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Edit Modal -->
-                    <div class="modal fade" id="editKategoriModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editKategoriModalLabel-{{ $item->id }}" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="editKategoriModalLabel-{{ $item->id }}">Edit Kategori</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="POST" action="{{ route('kategori.update', $item->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="form-group">
-                                            <label for="kategoriName-{{ $item->id }}">Nama Kategori</label>
-                                            <input type="text" class="form-control" id="kategoriName-{{ $item->id }}" name="nama_kategori" value="{{ $item->nama_kategori }}" required>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     @endforeach
                 </div>
                 <!-- Form and scrolling Components end -->
             </div>
 
-            @foreach ($kategori as $item)
-            <div class="modal fade" id="editKategoriModal-{{$item->id}}" tabindex="-1" aria-labelledby="editKategoriModalLabel-{{$item->id}}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editKategoriModalLabel-{{$item->id}}">Edit Kategori</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Form untuk mengedit kategori -->
-                            <form action="{{ route('update.ruang', $item->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="mb-3">
-                                    <label for="namaKategori-{{$item->id}}" class="form-label">Nama Kategori</label>
-                                    <input type="text" class="form-control" id="namaKategori-{{$item->id}}" name="nama_kategori" value="{{ $item->nama_kategori }}" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        <!-- End of Modal -->
-
             @include('components.footer.footer')
         </div>
     </div>
+
+
+    @foreach ($kategori as $item)
+     <!-- Edit Modal -->
+     <div class="modal fade" id="editKategoriModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editKategoriModalLabel-{{ $item->id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editKategoriModalLabel-{{ $item->id }}">Edit Kategori</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('kategori.update', $item->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="kategoriName-{{ $item->id }}">Nama Kategori</label>
+                            <input type="text" class="form-control" id="kategoriName-{{ $item->id }}" name="nama_kategori" value="{{ $item->nama_kategori }}" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
 @endsection
