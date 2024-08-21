@@ -77,14 +77,11 @@
                                 <a href="#" class="btn btn-primary">
                                     <i class="fas fa-ellipsis-h"></i>
                                 </a>
-<<<<<<< Updated upstream
                                 <button data-bs-toggle="modal"
                                 data-bs-target="#editKategoriModal-{{$item->id}}" class="btn btn-warning">
                                     <i class="far fa-edit"></i>
                                 </button>
                                 <a class="btn btn-danger">
-=======
-<<<<<<< HEAD
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editKategoriModal-{{ $item->id }}">
                                     <i class="far fa-edit"></i>
                                 </button>
@@ -92,14 +89,11 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">
-=======
                                 <button data-bs-toggle="modal"
                                 data-bs-target="#editKategoriModal-{{$item->id}}" class="btn btn-warning">
                                     <i class="far fa-edit"></i>
                                 </button>
                                 <a class="btn btn-danger">
->>>>>>> dc9228ed3150b2000358ddb9510bfb22c8fafe62
->>>>>>> Stashed changes
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                                 </form>
