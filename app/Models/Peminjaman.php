@@ -11,7 +11,7 @@ class Peminjaman extends Model
 
     protected $fillable = ['barang_id', 'status_peminjaman'];
 
-    public function barang()
+    public function barangs()
     {
         return $this->belongsTo(Barang::class, 'barang_id', 'kode_barang');
     }

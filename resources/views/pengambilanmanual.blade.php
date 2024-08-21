@@ -48,12 +48,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($peminjaman as $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Mouse</td>
-                                    <td>Elektronik</td>
-                                    <td><span class="badge rounded-pill bg-danger">Sedang Digunakan</span></td>
-                                    <td>2021-10-10</td>
+                                    <td>{{$item->barang_id}}</td>
+                                    <td>{{$item->barangs->nama_barang}}</td>
+                                    <td>{{$item->barangs->kategori->nama_kategori}}</td>
+                                    <td>
+                                        @if($item->status_peminjaman == 'Sedang digunakan')
+                                            <span class="badge rounded-pill bg-danger">{{$item->status_peminjaman}}</span>
+                                        @else
+                                            <span class="badge rounded-pill bg-success">{{$item->status_peminjaman}}</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$item->created_at->translatedFormat('l, d F Y H:i')}}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalCenter">
@@ -61,6 +68,7 @@
                                         </button>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -83,7 +91,7 @@
             </div>
             <!-- Isi Modal -->
             <div class="modal-body">
-                <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('pemindahanmanual.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!-- Nama Penanggung Jawab -->
                     <div class="mb-3">
@@ -105,7 +113,6 @@
                         <input type="text" name="status" value="Sedang digunakan" class="form-control" id="InputResponsible"
                              required readonly>
                     </div>
-
             </div>
             <!-- Footer Modal -->
             <div class="modal-footer">

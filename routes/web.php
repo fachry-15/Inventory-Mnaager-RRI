@@ -45,6 +45,7 @@ Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 Route::get('/pindahbarang', [PindahBarangController::class, 'index'])->name('pindahbarang');
 Route::get('/pemindahan', [PengambilanControllers::class, 'index'])->name('pemindahan');
 Route::get('/pemindahanmanual', [PengambilanControllers::class, 'pengambilanmanual'])->name('pemindahanmanual');
+Route::post('/pemindahanmanual', [PengambilanControllers::class, 'store'])->name('pemindahanmanual.store');
 Route::get('/karyawan', [KaryawanControllers::class, 'index'])->name('karyawan');
 // routes/web.php
 Route::get('/generate-qrcode/{kode}', [BarangController::class, 'generateQRCode']);

@@ -20,8 +20,9 @@ class PengambilanControllers extends Controller
 
     public function pengambilanmanual()
     {
-        $barangs = barang::all();
-        return view('pengambilanmanual', compact('barangs'));
+        $barangs = barang::with('ruangans', 'kategori')->get();
+        $peminjaman = Peminjaman::with('barangs')->get();
+        return view('pengambilanmanual', compact('barangs', 'peminjaman'));
     }
 
     /**
@@ -48,6 +49,7 @@ class PengambilanControllers extends Controller
         // Simpan data ke database
         $peminjaman = new Peminjaman();
         $peminjaman->barang_id = $validatedData['kode_barang'];
+        $peminjaman->status_peminjaman = $validatedData['status'];
         $peminjaman->save();
 
         // Redirect dengan pesan sukses
