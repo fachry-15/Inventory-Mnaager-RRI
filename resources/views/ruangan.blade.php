@@ -79,10 +79,14 @@
                                                 data-bs-target="#updateModal-{{ $item->id }}">
                                                 <i class="far fa-edit"></i>
                                             </button>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalCenter">
-                                                Hapus
-                                            </button>
+                                            <!-- Delete button with form -->
+                                            <form action="{{ route('ruangan.destroy', $item->id) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus ruangan ini?');">
+                                                    Hapus
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

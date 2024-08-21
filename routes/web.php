@@ -51,3 +51,7 @@ Route::get('/generate-qrcode/{kode}', [BarangController::class, 'generateQRCode'
 
 
 require __DIR__ . '/auth.php';
+
+Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+Route::delete('/ruangan/{id}', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
+Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');

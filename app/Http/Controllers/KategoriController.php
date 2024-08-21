@@ -82,6 +82,20 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        $request->validate([
+            'nama_kategori' => 'required|string|max:255',
+        ]);
+    
+        $kategori = Kategori::findOrFail($id);
+        $kategori->nama_kategori = $request->input('nama_kategori');
+        $kategori->save();
+    
+        return back()->with('success', 'Kategori berhasil diubah');
+=======
+>>>>>>> Stashed changes
         try {
             // Validasi data
             $request->validate([
@@ -103,6 +117,10 @@ class KategoriController extends Controller
             Log::error($e->getMessage());
             return back()->with('error', 'Terjadi kesalahan saat memperbarui data kategori.');
         }
+<<<<<<< Updated upstream
+=======
+>>>>>>> dc9228ed3150b2000358ddb9510bfb22c8fafe62
+>>>>>>> Stashed changes
     }
 
 
@@ -114,6 +132,9 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+    
+        return back()->with('success', 'Kategori berhasil dihapus');   
     }
 }

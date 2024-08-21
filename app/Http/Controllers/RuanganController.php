@@ -132,6 +132,9 @@ class RuanganController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ruangan = Ruangan::findOrFail($id);
+        $ruangan->delete();
+    
+        return back()->with('success', 'Ruangan berhasil dihapus');
     }
 }
