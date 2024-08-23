@@ -81,38 +81,30 @@ class KategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama_kategori' => 'required|string|max:255',
-        ]);
-
-        $kategori = Kategori::findOrFail($id);
-        $kategori->nama_kategori = $request->input('nama_kategori');
-        $kategori->save();
-
-        return back()->with('success', 'Kategori berhasil diubah');
-        try {
-            // Validasi data
-            $request->validate([
-                'nama_kategori' => 'required|string|max:255',
-                'nama_ruang' => 'required|string|max:255',
-                'lantai' => 'required|integer',
-            ]);
-
-            // Temukan data berdasarkan ID
-            $kategori = Kategori::findOrFail($id);
-
-            // Update data
-            $kategori->nama_kategori = $request->nama_kategori;
-            $kategori->save();
-
-            // Redirect atau response
-            return redirect()->back()->with('success', 'Data Kategori berhasil diperbarui.');
-        } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
-            Log::error($e->getMessage());
-            return back()->with('error', 'Terjadi kesalahan saat memperbarui data kategori.');
+        {
+            try {
+                // Validasi data
+                $request->validate([
+                    'nama_kategori' => 'required|string|max:255',
+                    'nama_ruang' => 'required|string|max:255',
+                    'lantai' => 'required|integer',
+                ]);
+    
+                // Temukan data berdasarkan ID
+                $kategori = Kategori::findOrFail($id);
+    
+                // Update data
+                $kategori->nama_kategori = $request->nama_kategori;
+                $kategori->save();
+    
+                // Redirect atau response
+                return redirect()->back()->with('success', 'Data Kategori berhasil diperbarui.');
+            } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
+                Log::error($e->getMessage());
+                return back()->with('error', 'Terjadi kesalahan saat memperbarui data kategori.');
+            }
         }
-    }
+
 
 
     /**
@@ -125,7 +117,7 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
-
-        return back()->with('success', 'Kategori berhasil dihapus');
+    
+        return back()->with('success', 'Kategori berhasil dihapus');   
     }
 }

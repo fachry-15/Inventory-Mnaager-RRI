@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class KaryawanControllers extends Controller
 {
@@ -36,8 +37,24 @@ class KaryawanControllers extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users', // pastikan email unik di tabel users
+            'password' => 'required|string|min:8',
+        ]);
+
+        // Buat karyawan baru
+        $karyawan = new User(); // atau model karyawan jika ada
+        $karyawan->name = $request->name;
+        $karyawan->email = $request->email;
+        $karyawan->password = Hash::make($request->password); // Simpan password yang di-hash
+        $karyawan->save();
+
+        // Redirect atau response setelah berhasil menyimpan
+        return redirect()->back()->with('success', 'Karyawan berhasil ditambahkan.');
     }
+    
 
     /**
      * Display the specified resource.

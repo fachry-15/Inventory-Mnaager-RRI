@@ -51,10 +51,12 @@ Route::get('/karyawan', [KaryawanControllers::class, 'index'])->name('karyawan')
 Route::get('/generate-qrcode/{kode}', [BarangController::class, 'generateQRCode']);
 
 
+Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+Route::delete('/ruangan/{id}', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
+Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+Route::post('/karyawan/tambah', [KaryawanController::class, 'store'])->name('buatakun');
+Route::post('/karyawan/store', [KaryawanController::class, 'store'])->name('tambahkaryawan');
 
 
 require __DIR__ . '/auth.php';
 
-Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
-Route::delete('/ruangan/{id}', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
-Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
