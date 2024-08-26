@@ -62,7 +62,7 @@
                                     </td>
                                     <td>{{$item->created_at->translatedFormat('l, d F Y H:i')}}</td>
                                     <td>
-                                    <form action="{{ route('item.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                    <form action="{{ route('peminjaman.destroy', $item->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">

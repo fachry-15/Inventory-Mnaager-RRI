@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\barang;
 use App\Models\Peminjaman;
+use Illuminate\Console\View\Components\Confirm;
 use Illuminate\Http\Request;
 
 class PengambilanControllers extends Controller
@@ -21,41 +22,35 @@ class PengambilanControllers extends Controller
     public function pengambilanmanual()
     {
         $barangs = barang::with('ruangans', 'kategori')->get();
-        $peminjaman = Peminjaman::with('barangs')->get();
+        $peminjaman = Peminjaman::with('barangs')->latest()->get();
         return view('pengambilanmanual', compact('barangs', 'peminjaman'));
     }
 
     public function pengambilanotomatis()
     {
         $barangs = barang::with('ruangans', 'kategori')->get();
-        $peminjaman = Peminjaman::with('barangs')->get();
+        $peminjaman = Peminjaman::with('barangs')->latest()->get();
         return view('pengambilanotomatis', compact('barangs', 'peminjaman'));
     }
 
 
     public function scan(Request $request)
     {
-        $qrCodeData = $request->input('qrCode');
+        $cek = Peminjaman::where([
+            'barang_id' => $request->kode_barang,
+            'status_peminjaman' => 'sedang digunakan'
+        ])->first();
 
-        try {
-            // Validasi data
-            $validatedData = [
-                'kode_barang' => $qrCodeData, // Asumsikan data QR code adalah kode_barang
-                'status' => 'Sedang digunakan', // Status yang diinginkan, bisa disesuaikan
-            ];
-
-            // Simpan data ke database
-            $peminjaman = new Peminjaman();
-            $peminjaman->barang_id = $validatedData['kode_barang'];
-            $peminjaman->status_peminjaman = $validatedData['status'];
-            $peminjaman->save();
-
-            // Redirect dengan pesan sukses
-            return redirect('/pemindahanotomatis')->with('success', 'QR Code received and data saved.');
-        } catch (\Exception $e) {
-            // Redirect dengan pesan gagal
-            return redirect()->back()->with('error', 'Failed to save data: ' . $e->getMessage());
+        if ($cek) {
+            return redirect()->back()->with('error', 'Mohon maaf barang sedang digunakan saat ini.');
         }
+
+        $peminjaman = new Peminjaman();
+        $peminjaman->barang_id = $request->kode_barang;
+        $peminjaman->status_peminjaman = 'Sedang digunakan';
+        $peminjaman->save();
+
+        return redirect()->back()->with('success', 'Barang berhasil dipinjam.');
     }
 
     /**

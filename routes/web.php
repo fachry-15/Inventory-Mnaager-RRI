@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KaryawanControllers;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KembalikanControllers;
 use App\Http\Controllers\PengambilanControllers;
 use App\Http\Controllers\PindahBarangController;
 use App\Http\Controllers\ProfileController;
@@ -51,7 +52,10 @@ Route::get('/karyawan', [KaryawanControllers::class, 'index'])->name('karyawan')
 Route::get('/generate-qrcode/{kode}', [BarangController::class, 'generateQRCode']);
 Route::get('/pemindahanotomatis', [PengambilanControllers::class, 'pengambilanotomatis'])->name('pemindahanotomatis');
 Route::post('/scan', [PengambilanControllers::class, 'scan'])->name('scan');
-Route::delete('/item/{id}', [PengambilanControllers::class, 'destroy'])->name('item.destroy');
+Route::delete('/item/{id}', [PengambilanControllers::class, 'destroy'])->name('peminjaman.destroy');
+Route::get('/pengembalian', [KembalikanControllers::class, 'index'])->name('pengembalian');
+Route::get('/pengembalianotomatis', [KembalikanControllers::class, 'kembalikanotomatis'])->name('pengembalianotomatis');
+Route::post('/update-status', [KembalikanControllers::class, 'updateStatus'])->name('update.status');
 
 
 Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');

@@ -49,6 +49,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item  {{ request()->is('pengembalian*') ? 'active' : '' }}">
+                    <a href="{{ route('pengembalian') }}" class='sidebar-link'>
+                        <i class="fas fa-archive"></i>
+                        <span>Kembalikan Barang</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item {{ request()->is('pindahbarang*') ? 'active' : '' }} ">
                     <a href="{{ route('pindahbarang') }}" class='sidebar-link'>
                         <i class="fas fa-exchange-alt"></i>
