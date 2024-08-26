@@ -79,7 +79,7 @@
                             </button>
                         </div>
                         <div class="card-body">
-                            @if(session('success'))
+                            {{-- @if(session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
                                 </div>
@@ -93,7 +93,7 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                            @endif
+                            @endif --}}
 
                             <table class="table table-striped" id="table1">
                                 <thead>
@@ -135,9 +135,9 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <!-- Form Edit Karyawan -->
-                                                    <form>
+                                                    <form action="{{ route('karyawan.update', $item->id) }}" method="POST">
                                                         @csrf
-                                                        @method('PUT')
+                                                        @method('POST')
                                                         <div class="form-group">
                                                             <label for="editKaryawanName{{ $item->id }}">Nama Karyawan</label>
                                                             <input type="text" class="form-control" id="editKaryawanName{{ $item->id }}" name="name"
@@ -175,7 +175,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                    <form>
+                                                    <form action="{{ route('karyawan.destroy', $item->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Hapus</button>

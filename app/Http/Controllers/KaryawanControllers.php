@@ -54,7 +54,7 @@ class KaryawanControllers extends Controller
         // Redirect atau response setelah berhasil menyimpan
         return redirect()->back()->with('success', 'Karyawan berhasil ditambahkan.');
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -87,7 +87,24 @@ class KaryawanControllers extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        // Find the Karyawan model instance by ID
+        $karyawan = User::findOrFail($id);
+
+        // Update the model instance with validated data
+        $karyawan->name = $validatedData['name'];
+        $karyawan->email = $validatedData['email'];
+
+        // Save the changes to the database
+        $karyawan->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Karyawan updated successfully.');
     }
 
     /**
@@ -98,6 +115,13 @@ class KaryawanControllers extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Find the Karyawan model instance by ID
+        $karyawan = User::findOrFail($id);
+
+        // Delete the model instance from the database
+        $karyawan->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Akun Karyawan berhasil dihapus.');
     }
 }
