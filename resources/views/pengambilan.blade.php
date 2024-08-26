@@ -34,7 +34,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Pengambilan Otomatis</h5>
                                 <p class="card-text">Pengambilan Barang menggunakan kamera deteksi secara cepat</p>
-                                <a href="{{ route('pemindahanotomatis') }}" class="btn btn-primary">
+                                <a class="btn btn-primary">
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>

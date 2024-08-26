@@ -131,6 +131,13 @@ class PengambilanControllers extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Peminjaman::find($id);
+
+        if ($item) {
+            $item->delete();
+            return redirect()->route('pengambilanbarang')->with('success', 'Item berhasil dihapus.');
+        } else {
+            return redirect()->route('pengambilanbarang')->with('error', 'Item tidak ditemukan.');
+        }
     }
 }

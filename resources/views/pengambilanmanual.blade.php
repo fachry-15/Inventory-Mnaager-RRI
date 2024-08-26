@@ -62,10 +62,13 @@
                                     </td>
                                     <td>{{$item->created_at->translatedFormat('l, d F Y H:i')}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalCenter">
-                                        <i class="fas fa-trash"></i>
-                                        </button>
+                                    <form action="{{ route('item.destroy', $item->id) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Hapus
+                </button>
+            </form>
                                     </td>
                                 </tr>
                                 @endforeach
