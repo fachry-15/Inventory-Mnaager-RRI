@@ -62,9 +62,9 @@
                                     </td>
                                     <td>{{$item->created_at->translatedFormat('l, d F Y H:i')}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalCenter">
-                                        Lihat Data
+                                        <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>

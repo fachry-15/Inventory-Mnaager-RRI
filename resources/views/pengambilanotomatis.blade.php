@@ -27,66 +27,10 @@
                     </div>
                 </div>
             </div>
-            <h1>Scan QR Code</h1>
-            <video id="video"></video>
+            <div class="text-center">
+                <video id="video" style="border: 1px solid black;"></video>
+            </div>
             <p id="result">QR Code: </p>
-        
-            <script src="https://unpkg.com/@zxing/library@latest"></script>
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const codeReader = new ZXing.BrowserQRCodeReader();
-                    const videoElement = document.getElementById('video');
-                    const resultElement = document.getElementById('result');
-                    let isScanning = false;  // Pembatasan untuk mencegah multiple scans
-            
-                    codeReader.getVideoInputDevices().then((videoInputDevices) => {
-                        const firstDeviceId = videoInputDevices[0].deviceId;
-                        codeReader.decodeFromVideoDevice(firstDeviceId, videoElement, (result, error) => {
-                            if (result && !isScanning) {  // Cek apakah sudah scanning atau belum
-                                isScanning = true;  // Set flag untuk menghentikan scanning lebih lanjut
-                                console.log('QR Code detected:', result.text);
-                                resultElement.innerText = 'QR Code: ' + result.text;
-            
-                                // Stop scanning to avoid multiple detections
-                                codeReader.stopContinuousDecode();
-            
-                                // Delay 5 detik sebelum mengirim data
-                                setTimeout(() => {
-                                    // Send data to server
-                                    fetch('{{ route("qr.scan") }}', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                        },
-                                        body: JSON.stringify({ qrCode: result.text })
-                                    })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        console.log(data);
-                                        // Reload the page to refresh the data
-                                        window.location.href = window.location.href;
-                                    })
-                                    .catch(error => console.error('Error:', error))
-                                    .finally(() => {
-                                        // Allow scanning again after the operation is complete
-                                        isScanning = false;
-                                        codeReader.decodeFromVideoDevice(firstDeviceId, videoElement, (result, error) => {
-                                            // Restart scanning
-                                        });
-                                    });
-                                }, 5000); // Delay 5000 ms (5 detik)
-                            }
-                            if (error && !(error instanceof ZXing.NotFoundException)) {
-                                console.error(error);
-                            }
-                        });
-                    }).catch((err) => {
-                        console.error(err);
-                    });
-                });
-            </script>
-            
             <section class="section">
                 <div class="card">
 
@@ -135,5 +79,61 @@
         @include('components.footer.footer')
     </div>
 </div>
+
+<script src="https://unpkg.com/@zxing/library@latest"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const codeReader = new ZXing.BrowserQRCodeReader();
+        const videoElement = document.getElementById('video');
+        const resultElement = document.getElementById('result');
+        let isScanning = false;  // Pembatasan untuk mencegah multiple scans
+
+        codeReader.getVideoInputDevices().then((videoInputDevices) => {
+            const firstDeviceId = videoInputDevices[0].deviceId;
+            codeReader.decodeFromVideoDevice(firstDeviceId, videoElement, (result, error) => {
+                if (result && !isScanning) {  // Cek apakah sudah scanning atau belum
+                    isScanning = true;  // Set flag untuk menghentikan scanning lebih lanjut
+                    console.log('QR Code detected:', result.text);
+                    resultElement.innerText = 'QR Code: ' + result.text;
+
+                    // Stop scanning to avoid multiple detections
+                    codeReader.stopContinuousDecode();
+
+                    // Delay 5 detik sebelum mengirim data
+                    setTimeout(() => {
+                        // Send data to server
+                        fetch('{{ route("scan") }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({ qrCode: result.text })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            // Reload the page to refresh the data
+                            window.location.href = window.location.href;
+                        })
+                        .catch(error => console.error('Error:', error))
+                        .finally(() => {
+                            // Allow scanning again after the operation is complete
+                            isScanning = false;
+                            codeReader.decodeFromVideoDevice(firstDeviceId, videoElement, (result, error) => {
+                                // Restart scanning
+                            });
+                        });
+                    }, 5000); // Delay 5000 ms (5 detik)
+                }
+                if (error && !(error instanceof ZXing.NotFoundException)) {
+                    console.error(error);
+                }
+            });
+        }).catch((err) => {
+            console.error(err);
+        });
+    });
+</script>
 
 @endsection
