@@ -135,9 +135,9 @@ class PengambilanControllers extends Controller
 
         if ($item) {
             $item->delete();
-            return redirect()->route('pengambilanbarang')->with('success', 'Item berhasil dihapus.');
+            return redirect()->back()->with('success', 'Barang berhasil dihapus.');
         } else {
-            return redirect()->route('pengambilanbarang')->with('error', 'Item tidak ditemukan.');
+            return redirect()->back()->with('error', 'Barang tidak ditemukan.');
         }
     }
 }
