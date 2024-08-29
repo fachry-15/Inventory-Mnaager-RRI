@@ -78,9 +78,9 @@
                                 <td>{{$item->kode_barang}}</td>
                                 <td>{{$item->nama_barang}}</td>
                                 <td>{{$item->Kategori->nama_kategori}}</td>
-                                <td>{{$item->Ruangans->nama_ruang}}</td>
+                                <td>{{$item->Ruangans->kode_ruang}}</td>
                                 <td>{{$item->tanggal_masuk}}</td>
-                                <td>{{$item->tanggal_kadaluarsa ?? 'Tidak ada kadaluarsa'}}</td>
+                                <td>{{$item->tanggal_kadaluarsa ?? '-'}}</td>
                                 <td>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{ asset('images/' . $item->bukti_gambar) }}">
                                         <i class="fas fa-image"></i>
