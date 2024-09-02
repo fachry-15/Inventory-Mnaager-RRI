@@ -53,10 +53,13 @@
                         <div class="card-header">
                             <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
                             data-bs-target="#exampleModalCenter">
-                            Tambah Barang
+                            <i class="fas fa-plus"></i> Tambah Barang
                              </button>
-                             <a href="{{ route('export.pdf') }}" style="background-color: #dc3545; color: #fff; border: 1px solid #dc3545; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-                            Export Barang
+                             <a href="{{ route('export.pdf') }}" class="btn btn-danger block">
+                                <i class="fas fa-file"></i> Export PDF
+                             </a>
+                             <a href="{{ route('export.pdf') }}" class="btn btn-success block">
+                                <i class="fas fa-file-alt"></i> Export Excel
                              </a>
                         </div>
                         <div class="card-body">

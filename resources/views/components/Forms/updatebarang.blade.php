@@ -63,7 +63,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <img src="{{ asset('images/' . $item->bukti_gambar) }}" class="card-img-top img-thumbnail" alt="Gambar Barang">
                                 <p class="card-text">Nama file: {{ $item->bukti_gambar }}</p>
                                 <p class="card-text">Tanggal unggah: {{ $item->tanggal_unggah ?? 'Tidak diketahui' }}</p>
-                                <p class="card-text">Ukuran: {{ number_format(filesize(public_path('images/' . $item->bukti_gambar)) / 1024, 2) }} KB</p>
+                                {{-- <p class="card-text">Ukuran: {{ number_format(filesize(public_path('images/' . $item->bukti_gambar)) / 1024, 2) }} KB</p> --}}
                             </div>
                         </div>
                     @else
