@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF;
+use App\Models\barang;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
     public function generatePDF()
     {
-        $pdf = FacadePdf::loadView('myPDF')->setPaper('A4', 'portrait');
+
+        $barangs =  barang::with('ruangans', 'kategori')->get();
+       
+        $pdf = FacadePdf::loadView('myPDF', compact('barangs'))->setPaper('A4', 'portrait');
 
         return $pdf->stream('hdtuto.pdf');
     }

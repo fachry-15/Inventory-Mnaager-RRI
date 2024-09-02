@@ -55,8 +55,8 @@
                             data-bs-target="#exampleModalCenter">
                             Tambah Barang
                              </button>
-                             <a href="{{ route('export.pdf') }}">
-                            Tambah Barang
+                             <a href="{{ route('export.pdf') }}" style="background-color: #dc3545; color: #fff; border: 1px solid #dc3545; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                            Export Barang
                              </a>
                         </div>
                         <div class="card-body">
