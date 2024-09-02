@@ -86,8 +86,6 @@ class KategoriController extends Controller
                 // Validasi data
                 $request->validate([
                     'nama_kategori' => 'required|string|max:255',
-                    'nama_ruang' => 'required|string|max:255',
-                    'lantai' => 'required|integer',
                 ]);
     
                 // Temukan data berdasarkan ID
@@ -115,9 +113,14 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategori = Kategori::findOrFail($id);
-        $kategori->delete();
+        try {
+            $kategori = Kategori::findOrFail($id);
+            $kategori->delete();
     
-        return back()->with('success', 'Kategori berhasil dihapus');   
+            return back()->with('success', 'Kategori berhasil dihapus.');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan saat menghapus kategori.');
+        }
     }
 }

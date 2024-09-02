@@ -85,6 +85,7 @@
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
+                            </form>
                             </div>
                         </div>
                     </div>
