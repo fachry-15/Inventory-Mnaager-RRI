@@ -55,6 +55,9 @@
                             data-bs-target="#exampleModalCenter">
                             Tambah Barang
                              </button>
+                             <a href="{{ route('export.pdf') }}">
+                            Tambah Barang
+                             </a>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped" id="table1">

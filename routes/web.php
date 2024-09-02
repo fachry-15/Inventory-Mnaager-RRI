@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KaryawanControllers;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KembalikanControllers;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PengambilanControllers;
 use App\Http\Controllers\PindahBarangController;
 use App\Http\Controllers\ProfileController;
@@ -65,5 +66,6 @@ Route::post('/karyawan/tambah', [KaryawanControllers::class, 'store'])->name('bu
 Route::post('/karyawan/store', [KaryawanControllers::class, 'store'])->name('tambahkaryawan');
 Route::post('/karyawan/{id}', [KaryawanControllers::class, 'update'])->name('karyawan.update');
 Route::delete('/karyawan/{id}', [KaryawanControllers::class, 'destroy'])->name('karyawan.destroy');
+Route::get('/export-pdf', [PdfController::class, 'generatePDF'])->name('export.pdf');
 
 require __DIR__ . '/auth.php';
