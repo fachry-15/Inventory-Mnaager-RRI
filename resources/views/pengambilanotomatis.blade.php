@@ -39,8 +39,16 @@
             <form action="{{ route('scan') }}" method="POST" id="form">
                 @csrf
                 <input type="hidden" name="kode_barang" id="kode_barang">
+            
+                <!-- Input yang akan diisi dengan data dari localStorage -->
+                <input type="hidden" name="kegiatan" id="kegiatan" value="">
+                <input type="hidden" name="tanggal_kegiatan" id="tanggal_kegiatan" value="">
+                <input type="hidden" name="jam_mulai" id="jam_mulai" value="">
+                <input type="hidden" name="jam_selesai" id="jam_selesai" value="">
+            
+                <!-- Button submit form -->
+                <button style="display: none" type="submit" class="btn btn-primary">Submit</button>
             </form>
-
             <section class="section">
                 <div class="card">
 
@@ -50,10 +58,11 @@
                                 <tr>
                                     <th>Kode Barang </th>
                                     <th>Nama Barang</th>
-                                    <th>Kategori</th>
                                     <th>Lokasi</th>
                                     <th>Status Barang </th>
-                                    <th>Tanggal Digunakan</th>        
+                                    <th>Tanggal Pengambilan</th> 
+                                    <th>Acara / Kegiatan</th> 
+                                    <th>Tanggal Digunakan</th>      
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -62,7 +71,6 @@
                                 <tr>
                                     <td>{{$item->barang_id}}</td>
                                     <td>{{$item->barangs->nama_barang}}</td>
-                                    <td>{{$item->barangs->kategori->nama_kategori}}</td>
                                     <td>{{$item->barangs->ruangans->nama_ruang}}</td>
                                     <td>
                                         @if($item->status_peminjaman == 'Sedang digunakan')
@@ -71,7 +79,9 @@
                                             <span class="badge rounded-pill bg-success">{{$item->status_peminjaman}}</span>
                                         @endif
                                     </td>
-                                    <td>{{$item->created_at->translatedFormat('l, d F Y H:i')}}</td>
+                                    <td>{{$item->created_at}}</td>
+                                    <td>{{$item->kegiatan}}</td>
+                                    <td>{{$item->tanggal_peminjaman}}</td>
                                     <td>
                                         <form id="deleteForm-{{$item->id}}" action="{{ route('peminjaman.destroy', $item->id) }}" method="POST" style="display: inline;">
                                             @csrf
@@ -133,5 +143,13 @@
         }
     }
 </script>
-
+<script>
+    // JavaScript to retrieve form data from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('kegiatan').value = localStorage.getItem('kegiatan');
+        document.getElementById('tanggal_kegiatan').value = localStorage.getItem('tanggal_kegiatan');
+        document.getElementById('jam_mulai').value = localStorage.getItem('jam_mulai');
+        document.getElementById('jam_selesai').value = localStorage.getItem('jam_selesai');
+    });
+</script>
 @endsection

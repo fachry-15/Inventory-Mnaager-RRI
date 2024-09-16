@@ -21,7 +21,7 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->is('barang*') ? 'active' : '' }}">
+                <li class="sidebar-item {{ request()->is('barang*') || request()->is('detail_barang/*') ? 'active' : '' }}">
                     <a href="{{ route('barang') }}" class='sidebar-link'>
                         <i class="fas fa-box"></i>
                         <span>Inventaris Barang</span>
@@ -35,10 +35,17 @@
                     </a>
                 </li>
 
-                    <li class="sidebar-item {{ request()->is('kategori*') ? 'active' : '' }}">
+                    <li class="sidebar-item {{ request()->is('kategori*') || request()->is('daftarbaranag/*') ? 'active' : '' }}">
                         <a href="{{ route('kategori') }}" class='sidebar-link'>
                             <i class="fas fa-layer-group"></i>
                             <span>Kategori Barang</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {{ request()->is('DaftarKantor') ? 'active' : '' }} ">
+                        <a href="{{ route('daftarkantor') }}" class='sidebar-link'>
+                            <i class="far fa-building"></i>
+                            <span>Daftar Kantor</span>
                         </a>
                     </li>
 
@@ -56,10 +63,17 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->is('pindahbarang*') ? 'active' : '' }} ">
-                    <a href="{{ route('pindahbarang') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->is('PindahBarangMenu*') ? 'active' : '' }} ">
+                    <a href="{{ route('pindahbarangmenu') }}" class='sidebar-link'>
                         <i class="fas fa-exchange-alt"></i>
-                        <span>Pemindahan Barang</span>
+                        <span>Pindah Barang</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item {{ request()->is('karyawan*') ? 'active' : '' }} ">
+                    <a href="{{ route('karyawan') }}" class='sidebar-link'>
+                        <i class="fas fa-wrench"></i>
+                        <span>Perawatan Barang</span>
                     </a>
                 </li>
 

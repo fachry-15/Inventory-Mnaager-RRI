@@ -13,9 +13,17 @@ class PdfController extends Controller
     {
 
         $barangs =  barang::with('ruangans', 'kategori')->get();
-       
+
         $pdf = FacadePdf::loadView('myPDF', compact('barangs'))->setPaper('A4', 'portrait');
 
         return $pdf->stream('hdtuto.pdf');
+    }
+
+    public function generatePDFbarcode()
+    {
+        $barangs =  barang::all();
+        $pdf = FacadePdf::loadView('barcodePDF', compact('barangs'))->setPaper('A4', 'portrait');
+
+        return $pdf->stream('Barcode.pdf');
     }
 }

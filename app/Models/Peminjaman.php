@@ -9,7 +9,7 @@ class Peminjaman extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['barang_id', 'status_peminjaman'];
+    protected $fillable = ['barang_id', 'status_peminjaman', 'kegiatan', 'tanggal_peminjaman', 'mulai_acara', 'selesai_acara'];
 
     public function barangs()
     {

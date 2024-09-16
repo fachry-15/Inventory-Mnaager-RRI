@@ -50,7 +50,7 @@
                         <label for="InputResponsible" class="form-label">Nama Penanggung
                             Jawab</label>
                         <input type="text" name="penanggungjawab" class="form-control" id="InputResponsible"
-                            placeholder="Masukkan Nama Penanggung Jawab" required>
+                            placeholder="Masukkan Nama Penanggung Jawab" value="{{ Auth::user()->name }}" readonly required>
                     </div>
                     <!-- Ruangan -->
                     <div class="mb-3">
@@ -73,16 +73,28 @@
                         <label for="InputDateMasuk" class="form-label">Tanggal Masuk</label>
                         <input type="date" name="masuk" class="form-control" id="InputDateMasuk" required>
                     </div>
-                    <!-- Tanggal Maintenance -->
                     <div class="mb-3">
-                        <label for="InputDateMaintenance" class="form-label">Tanggal Maintenance</label>
-                        <input type="date" name="maintenance" class="form-control" id="InputDateMaintenance" required>
+                        <label for="sumber" class="form-label">Sumber Barang</label>
+                        <select class="form-control" id="InputSource" name="sumber" required>
+                            <option value="" disabled selected>Pilih Sumber Barang</option>
+                            <option value="Pembelian">Pembelian</option>
+                            <option value="Hibah">Hibah</option>
+                            <option value="Produksi Sendiri">Produksi Sendiri</option>
+                        </select>
                     </div>
-                    <!-- Tanggal Kadaluwarsa -->
                     <div class="mb-3">
-                        <label for="InputExpiryDate" class="form-label">Tanggal Kadaluwarsa</label>
-                        <input type="date" name="kadaluwarsa" class="form-control" id="InputExpiryDate">
+                        <label for="kantor" class="form-label">Kantor Pemilik Barang</label>
+                        <select class="form-control" id="InputOffice" name="kantor" required>
+                            <option value="" disabled selected>Pilih Kantor Pemilik Barang</option>
+                           <option value="LPP RRI Surabaya">LPP RRI Surabaya</option>
+                        </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="lampiran" class="form-label">Lampiran Dokumen Penunjang</label>
+                        <input type="file" name="file" class="form-control" id="InputDateMasuk">
+                        <small class="form-text text-muted">*Opsional (Jika Tidak terdapat file lampiran atau Nota Dinas lewati saja)</small>
+                    </div>
+                    
             </div>
             <!-- Footer Modal -->
             <div class="modal-footer">

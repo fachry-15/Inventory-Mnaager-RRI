@@ -23,8 +23,10 @@ return new class extends Migration
             $table->foreignId('ruangan_id')->constrained('ruangans')->onDelete('cascade');
             $table->string('bukti_gambar')->nullable();
             $table->date('tanggal_masuk');
-            $table->date('tanggal_maintenace')->nullable();
-            $table->date('tanggal_kadaluarsa')->nullable();
+            $table->string('lokasi');
+            $table->string('sumber_barang');
+            $table->string('lampiran')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

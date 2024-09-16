@@ -73,7 +73,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{$item->nama_kategori}}</h5>
                                 <p class="card-text">Klik tombol di bawah ini untuk melihat lebih banyak informasi</p>
-                                <a href="#" class="btn btn-primary">
+                                <a href="{{ route('daftarbarangkategori', $item->id) }}" class="btn btn-primary">
                                     <i class="fas fa-ellipsis-h"></i>
                                 </a>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editKategoriModal-{{ $item->id }}">

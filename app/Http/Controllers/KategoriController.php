@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\barang;
 use App\Models\Kategori;
+use App\Models\ruangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class KategoriController extends Controller
@@ -19,6 +22,27 @@ class KategoriController extends Controller
         return view('kategori', compact('kategori'));
     }
 
+    public function detailkategori($id)
+    {
+        // Mengambil semua data kategori dan ruangan
+        $kategori = Kategori::all();
+        $ruangans = Ruangan::all();
+
+        // Mengambil data barang dengan nama_barang yang unik saja dan sesuai dengan kategori_id
+        $barangs = Barang::select('nama_barang', DB::raw('MIN(kategori_id) as kategori_id'), DB::raw('MIN(ruangan_id) as ruangan_id'), DB::raw('MIN(tanggal_masuk) as tanggal_masuk'), DB::raw('MIN(tanggal_kadaluarsa) as tanggal_kadaluarsa'))
+            ->where('kategori_id', $id)
+            ->groupBy('nama_barang')
+            ->get();
+
+        // Menghitung jumlah barang berdasarkan nama_barang dan sesuai dengan kategori_id
+        $barangCounts = Barang::select('nama_barang', DB::raw('count(*) as total'))
+            ->where('kategori_id', $id)
+            ->groupBy('nama_barang')
+            ->get();
+
+        // Mengirim data ke view
+        return view('daftarkategori', compact('barangs', 'kategori', 'ruangans', 'barangCounts'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -81,27 +105,27 @@ class KategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-        {
-            try {
-                // Validasi data
-                $request->validate([
-                    'nama_kategori' => 'required|string|max:255',
-                ]);
-    
-                // Temukan data berdasarkan ID
-                $kategori = Kategori::findOrFail($id);
-    
-                // Update data
-                $kategori->nama_kategori = $request->nama_kategori;
-                $kategori->save();
-    
-                // Redirect atau response
-                return redirect()->back()->with('success', 'Data Kategori berhasil diperbarui.');
-            } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
-                Log::error($e->getMessage());
-                return back()->with('error', 'Terjadi kesalahan saat memperbarui data kategori.');
-            }
+    {
+        try {
+            // Validasi data
+            $request->validate([
+                'nama_kategori' => 'required|string|max:255',
+            ]);
+
+            // Temukan data berdasarkan ID
+            $kategori = Kategori::findOrFail($id);
+
+            // Update data
+            $kategori->nama_kategori = $request->nama_kategori;
+            $kategori->save();
+
+            // Redirect atau response
+            return redirect()->back()->with('success', 'Data Kategori berhasil diperbarui.');
+        } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
+            Log::error($e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan saat memperbarui data kategori.');
         }
+    }
 
 
 
@@ -116,7 +140,7 @@ class KategoriController extends Controller
         try {
             $kategori = Kategori::findOrFail($id);
             $kategori->delete();
-    
+
             return back()->with('success', 'Kategori berhasil dihapus.');
         } catch (\Exception $e) {
             Log::error($e->getMessage());

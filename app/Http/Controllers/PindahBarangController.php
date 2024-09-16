@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class PindahBarangController extends Controller
 {
+    public function menu()
+    {
+        $ruangan = ruangan::all();
+        return view('pemindahanMenu', compact('ruangan'));
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +27,34 @@ class PindahBarangController extends Controller
         $ruangans = ruangan::all();
         $barangs =  barang::with('ruangans', 'kategori')->get();
         return view('pindah', compact('barangs', 'ruangans', 'kategori'));
+    }
+
+    public function pindahotomatis()
+    {
+        $barangs = barang::with('ruangans', 'kategori')->get();
+        return view('PindahBarangOtomatis', compact('barangs'));
+    }
+
+    public function updateRuangan(Request $request)
+    {
+        // Validasi data
+        $validatedData = $request->validate([
+            'kode_barang' => 'required|string|max:255',
+            'ruangan' => 'required|string|max:255',
+        ]);
+
+        // Cari barang berdasarkan kode_barang
+        $barang = Barang::where('kode_barang', $validatedData['kode_barang'])->first();
+
+        if ($barang) {
+            // Update kolom ruangan
+            $barang->ruangan_id = $validatedData['ruangan'];
+            $barang->save();
+
+            return redirect()->back()->with('success', 'Ruangan berhasil diperbarui.');
+        } else {
+            return redirect()->back()->with('error', 'Barang tidak ditemukan.');
+        }
     }
 
     /**

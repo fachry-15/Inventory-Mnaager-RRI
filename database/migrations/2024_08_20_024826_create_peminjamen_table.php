@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('barang_id'); // Ubah tipe data menjadi string
             $table->foreign('barang_id')->references('kode_barang')->on('barangs')->onDelete('cascade');
             $table->string('status_peminjaman');
+            $table->string('kegiatan');
+            $table->date('tanggal_peminjaman');
+            $table->string('mulai_acara');
+            $table->string('selesai_acara');
             $table->timestamps();
         });
     }

@@ -83,10 +83,18 @@ class KembalikanControllers extends Controller
             ->first();
 
         if ($item) {
-            $item->status_peminjaman = 'Telah Dkembalikan';
+            // Update status peminjaman
+            $item->status_peminjaman = 'Telah Dikembalikan';
             $item->save();
 
-            return redirect()->back()->with('success', 'Status barang berhasil diperbarui.');
+            // Update status barang menjadi kosong
+            $barang = Barang::where('id', $kodeBarang)->first();
+            if ($barang) {
+                $barang->status = null;
+                $barang->save();
+            }
+
+            return redirect()->back()->with('success', 'Terima kasih sudah mengembalikan barang angkasawan/angkasawati.');
         } else {
             return redirect()->back()->with('error', 'Mohon maaf, barang yang anda inginkan sudah dikembalikan.');
         }
