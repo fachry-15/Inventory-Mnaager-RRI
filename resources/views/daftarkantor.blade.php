@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
                             <h3>Daftar Kantor RRI Jawa Timur</h3>
-                            <p class="text-subtitle text-muted">Informasi Daftra Kantor RRI Jawa Timur</p>
+                            <p class="text-subtitle text-muted">Informasi Daftar Kantor RRI Jawa Timur</p>
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -29,52 +29,49 @@
                     </div>
                 </div>
 
-                <!-- Modal Tambah Karyawan start -->
-                <div class="modal fade" id="tambahkaryawan" tabindex="-1" role="dialog"
-     aria-labelledby="tambahKaryawanModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tambahKaryawanModalLabel">Tambah Kantor</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Form Tambah Kantor -->
-                <form id="kantorForm" action="{{ route('tambahkantor') }}" method="POST">
-                    @csrf
-                    <div class="form-control mb-1">
-                        <label for="kantor">Nama Kantor:</label>
-                        <input type="text" class="form-control mt-2" id="kantor" name="kantor"
-                               placeholder="Masukkan nama kantor" required>
+                <!-- Modal Tambah Kantor start -->
+                <div class="modal fade" id="tambahkaryawan" tabindex="-1" role="dialog" aria-labelledby="tambahKaryawanModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tambahKaryawanModalLabel">Tambah Kantor</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Form Tambah Kantor -->
+                                <form id="kantorForm" action="{{ route('tambahkantor') }}" method="POST">
+                                    @csrf
+                                    <div class="form-control mb-1">
+                                        <label for="kantor">Nama Kantor:</label>
+                                        <input type="text" class="form-control mt-2" id="kantor" name="kantor" placeholder="Masukkan nama kantor" required>
+                                    </div>
+                                    <div class="form-control mb-3">
+                                        <label for="kota">Kabupaten / Kota</label>
+                                        <select class="form-control mt-2" id="kota" name="kota" required>
+                                            <option value="" disabled selected>Pilih Kabupaten / Kota</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-control mb-3">
+                                        <label for="Alamat">Alamat</label>
+                                        <input type="text" class="form-control mt-2" id="Alamat" name="Alamat" placeholder="Masukkan alamat" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary">Tambah Kantor</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-control mb-3">
-                        <label for="kota">Kabupaten / Kota</label>
-                        <select class="form-control mt-2" id="kota" name="kota" required>
-                            <option value="" disabled selected>Pilih Kabupaten / Kota</option>
-                        </select>
-                    </div>
-                    <div class="form-control mb-3">
-                        <label for="Alamat">Alamat</label>
-                        <input type="text" class="form-control mt-2" id="Alamat" name="Alamat"
-                               placeholder="Masukkan alamat" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Tambah Kantor</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                </div>
+                <!-- Modal Tambah Kantor end -->
 
                 <section class="section">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" class="btn btn-primary block" data-bs-toggle="modal"
-                                    data-bs-target="#tambahkaryawan">
+                            <button type="button" class="btn btn-primary block" data-bs-toggle="modal" data-bs-target="#tambahkaryawan">
                                 Tambah Kantor
                             </button>
                         </div>
@@ -90,27 +87,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($kantor as  $item)
+                                    @foreach ($kantor as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nama_kantor }}</td>
                                         <td>{{ $item->Kota }}</td>
                                         <td>{{ substr($item->alamat_kantor, 0, 50) }}{{ strlen($item->alamat_kantor) > 50 ? '...' : '' }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#editKaryawan{{ $item->id }}">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editKaryawan{{ $item->id }}">
                                                 <i class="far fa-edit"></i>
                                             </button>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteKaryawan{{ $item->id }}">
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteKaryawan{{ $item->id }}">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </td>
                                     </tr>
 
-                                    <!-- Modal Edit Karyawan -->
-                                    <div class="modal fade" id="editKaryawan{{ $item->id }}" tabindex="-1" role="dialog"
-                                         aria-labelledby="editKaryawanLabel{{ $item->id }}" aria-hidden="true">
+                                    <!-- Modal Edit Kantor -->
+                                    <div class="modal fade" id="editKaryawan{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editKaryawanLabel{{ $item->id }}" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -120,24 +114,21 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <!-- Form Edit Karyawan -->
+                                                    <!-- Form Edit Kantor -->
                                                     <form action="{{ route('kantor.update', $item->id) }}" method="POST">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group">
                                                             <label for="Nama{{ $item->id }}">Nama Kantor</label>
-                                                            <input type="text" class="form-control" id="Nama{{ $item->id }}" name="kantor"
-                                                                   value="{{ $item->nama_kantor }}" required>
+                                                            <input type="text" class="form-control" id="Nama{{ $item->id }}" name="kantor" value="{{ $item->nama_kantor }}" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="Kota{{ $item->id }}">Kota</label>
-                                                            <input type="text" class="form-control" id="Kota{{ $item->id }}" name="kota"
-                                                                   value="{{ $item->Kota }}" required>
+                                                            <input type="text" class="form-control" id="Kota{{ $item->id }}" name="kota" value="{{ $item->Kota }}" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="alamat{{ $item->id }}">Alamat</label>
-                                                            <input type="text" class="form-control" id="alamat{{ $item->id }}" name="alamat"
-                                                                   value="{{ $item->alamat_kantor }}" required>
+                                                            <input type="text" class="form-control" id="alamat{{ $item->id }}" name="alamat" value="{{ $item->alamat_kantor }}" required>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -148,11 +139,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- End of Modal Edit Karyawan -->
+                                    <!-- End of Modal Edit Kantor -->
 
-                                    <!-- Modal Delete Karyawan -->
-                                    <div class="modal fade" id="deleteKaryawan{{ $item->id }}" tabindex="-1" role="dialog"
-                                         aria-labelledby="deleteKaryawanLabel{{ $item->id }}" aria-hidden="true">
+                                    <!-- Modal Delete Kantor -->
+                                    <div class="modal fade" id="deleteKaryawan{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteKaryawanLabel{{ $item->id }}" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -175,7 +165,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- End of Modal Delete Karyawan -->
+                                    <!-- End of Modal Delete Kantor -->
                                     @endforeach
                                 </tbody>
                             </table>
@@ -195,8 +185,8 @@
                     const kotaSelect = document.getElementById('kota');
                     data.forEach(kota => {
                         const option = document.createElement('option');
-                        option.value = kota.name; // Menggunakan nilai 'name' dari API
-                        option.text = kota.name; // Menggunakan nilai 'name' dari API
+                        option.value = kota.name;
+                        option.text = kota.name;
                         kotaSelect.appendChild(option);
                     });
                 })
