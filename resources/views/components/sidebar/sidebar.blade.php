@@ -14,8 +14,8 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                <li class="sidebar-item  {{ request()->is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -70,19 +70,21 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->is('karyawan*') ? 'active' : '' }} ">
-                    <a href="{{ route('karyawan') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->is('Maintenance') ? 'active' : '' }} ">
+                    <a href="{{ route('maintenance') }}" class='sidebar-link'>
                         <i class="fas fa-wrench"></i>
                         <span>Perawatan Barang</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->is('karyawan*') ? 'active' : '' }} ">
+                @if (auth()->user()->role == 'superadmin')
+                <li class="sidebar-item {{ request()->is('karyawan*') ? 'active' : '' }}">
                     <a href="{{ route('karyawan') }}" class='sidebar-link'>
                         <i class="fas fa-user"></i>
                         <span>Akun Karyawan</span>
                     </a>
                 </li>
+            @endif
 
                 <li class="sidebar-title">Akun</li>
 

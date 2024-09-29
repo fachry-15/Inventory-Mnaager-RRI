@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karcis Maintenance</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .ticket-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .ticket {
+            max-width: 15cm;
+            /* Lebar maksimal 15 cm */
+            width: 100%;
+            /* Supaya tiket fleksibel dan responsif */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-left: 8px solid #007bff;
+            position: relative;
+        }
+
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ticket-header h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .ticket-code {
+            font-size: 18px;
+            color: #555;
+            background-color: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .ticket-body p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .ticket-body p span {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .ticket-footer {
+            margin-top: 20px;
+            text-align: center;
+            border-top: 2px dashed #ddd;
+            padding-top: 10px;
+        }
+
+        .ticket-footer p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Gaya untuk cetak */
+        @media print {
+            body {
+                background-color: #fff;
+                margin: 0;
+            }
+
+            .ticket-container {
+                min-height: auto;
+                display: block;
+                padding: 0;
+                margin: 0;
+            }
+
+            .ticket {
+                box-shadow: none;
+                border: 1px solid #333;
+                border-radius: 0;
+            }
+
+            .ticket-header,
+            .ticket-footer {
+                border: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ticket-container">
+        <div class="ticket">
+            <div class="ticket-header">
+                <h2>Karcis Maintenance</h2>
+                <div class="ticket-code">#123456</div> <!-- Kode tiket -->
+            </div>
+            <div class="ticket-body">
+                <p><span>Nama Barang:</span> Komputer Dell</p> <!-- Nama barang -->
+                <p><span>Diagnosa:</span> Kerusakan pada motherboard</p> <!-- Diagnosa -->
+                <p><span>Deskripsi Perawatan:</span> Penggantian motherboard dan pembersihan komponen</p>
+                <!-- Deskripsi perawatan -->
+                <p><span>Tanggal Perbaikan:</span> 23 Februari 2024</p> <!-- Tanggal perbaikan/pergantian -->
+            </div>
+            <div class="ticket-footer">
+                <p>PT. Perawatan Teknologi</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -71,7 +71,6 @@
                                     <th>Kategori</th>
                                     <th>Kode Ruang</th>
                                     <th>Tanggal Masuk</th>
-                                    <th>Tanggal Kadaluarsa</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -89,13 +88,12 @@
                                         <td>{{ $barang->kategori->nama_kategori ?? 'Tidak ada kategori' }}</td>
                                         <td>{{ $barang->ruangans->kode_ruang ?? 'Tidak ada ruangan' }}</td>
                                         <td>{{ $barang->tanggal_masuk }}</td>
-                                        <td>{{ $barang->tanggal_kadaluarsa ?? '-' }}</td>
                                         <td>
                                             <a href="{{ route('detailbarang', $barang->nama_barang) }}" class="btn btn-primary">Lihat Data</a>
                                         </td>
                                     </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody>    
                         </table>
                     </div>
                 </div>

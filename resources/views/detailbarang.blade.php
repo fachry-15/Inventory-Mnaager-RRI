@@ -147,7 +147,7 @@
     </div>
 </div>
 
-@include('components.Forms.tambahbarang')
+{{-- @include('components.Forms.tambahbarang') --}}
 @include('components.Forms.updatebarang')
 
 <script>

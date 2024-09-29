@@ -29,7 +29,7 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <h6 class="text-muted font-semibold">Barang</h6>
-                                                <h6 class="font-extrabold mb-0">112</h6>
+                                                <h6 class="font-extrabold mb-0">{{ count($barang) }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -45,8 +45,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Kategori</h6>
-                                                <h6 class="font-extrabold mb-0">10</h6>
+                                                <h6 class="text-muted font-semibold">Kantor</h6>
+                                                <h6 class="font-extrabold mb-0">{{ count($kantor)}}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <h6 class="text-muted font-semibold">Ruangan</h6>
-                                                <h6 class="font-extrabold mb-0">8</h6>
+                                                <h6 class="font-extrabold mb-0">{{ count($ruangan)}}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -79,99 +79,13 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Booking</h6>
-                                                <h6 class="font-extrabold mb-0">112</h6>
+                                                <h6 class="text-muted font-semibold">Digunakan</h6>
+                                                <h6 class="font-extrabold mb-0">{{ count($digunakan) > 0 ? count($digunakan) : 0 }}</h6>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                          <table class="table table-striped" id="table1">
-                              <thead>
-                                <tr>
-                                  <th>ID </th>
-                                  <th>Nama </th>
-                                  <th>Jumlah </th>
-                                  <th>Satuan </th>
-                                  <th>Kategori </th>
-                                  <th>Ruangan</th>
-                                  <th>Pj</th>
-                                  <th>Gambar</th>
-                                  <th>Tanggal Masuk</th>
-                                  <th>Tanggal Selesai</th>
-                                  <th>Aksi</th>
-                              </tr>
-                              </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>EDS324</td>
-                                      <td>laptop ASUS</td>
-                                      <td>10</td>
-                                      <td>unit</td>
-                                      <td>Laptop</td>
-                                      <td>TMB</td>
-                                      <td>Desi S.Tr</td>
-                                      <td>-</td>
-                                      <td>10 januari 2025</td>
-                                      <td>2027</td>
-                                      <td>
-                                          <button class="btn btn-success">edit</button>
-                                      </td>
-                                  </tr>
-                                  </tbody>
-                          </table>
-                      </div>
-                        <div class="card-body">
-                            <table class="table table-striped" id="table1">
-                                <thead>
-                                    <tr>
-                                        <th>ID </th>
-                                        <th>Nama </th>
-                                        <th>Jumlah </th>
-                                        <th>Satuan </th>
-                                        <th>Kategori </th>
-                                        <th>Ruangan</th>
-                                        <th>Pj</th>
-                                        <th>Gambar</th>
-                                        <th>Tanggal Masuk</th>
-                                        <th>Tanggal Selesai</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                    <tr>
-                                        <td>EDS324</td>
-                                        <td>laptop ASUS</td>
-                                        <td>10</td>
-                                        <td>unit</td>
-                                        <td>Laptop</td>
-                                        <td>TMB</td>
-                                        <td>Desi S.Tr</td>
-                                        <td>-</td>
-                                        <td>10 januari 2025</td>
-                                        <td>2027</td>
-                                        <td>
-                                            <button class="btn btn-success">edit</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>EDS324</td>
-                                        <td>laptop ASUS</td>
-                                        <td>10</td>
-                                        <td>unit</td>
-                                        <td>Laptop</td>
-                                        <td>TMB</td>
-                                        <td>Jono S.E</td>
-                                        <td>-</td>
-                                        <td>10 januari 2025</td>
-                                        <td>2027</td>
-                                        <td>
-                                            <button class="btn btn-success">edit</button>
-                                        </td>
-                                    </tr>
-                                </thead>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                     
@@ -183,7 +97,7 @@
                                         <img src="assets/images/faces/1.jpg" alt="Face 1">
                                     </div>
                                     <div class="ms-3 name">
-                                        <h5 class="font-bold">{{ Auth::user()->name }}</h5>
+                                        <h5 class="font-bold"> {{ Auth::user()->role}} </h5>
                                         <h6 class="text-muted mb-0">{{ Auth::user()->email }}</h6>
                                     </div>
                                 </div>
@@ -193,65 +107,86 @@
                 </section>
 
                 <div class="card-body">
-                    <table class="table table-striped" id="table1">
+                    <div class="page-heading">
+                        <h5>Barang Terbaru</h5>
+                    </div>
+                    <table class="table table-striped" >
+                        <thead>
+                            <tr>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Kategori</th>
+                                <th>Ruangan</th>
+                                <th>Sumber</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($barangs as $item)
+                                <tr>
+                                    <th>{{ $item->kode_barang}}</th>
+                                    <th>{{ $item->nama_barang}}</th>
+                                    <th>{{ $item->kategori->nama_kategori}}</th>
+                                    <th>{{ $item->ruangans->nama_ruang}}</th>
+                                    <th>{{ $item->sumber_barang}}</th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-body">
+                    <div class="page-heading">
+                        <h5>Barang Sedang Digunakan</h5>
+                    </div>
+                    <table class="table table-striped" >
+                        <thead>
+                            <tr>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Kategori</th>
+                                <th>Ruangan</th>
+                                <th>Sumber</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($barangs as $item)
+                                <tr>
+                                    <th>{{ $item->kode_barang}}</th>
+                                    <th>{{ $item->nama_barang}}</th>
+                                    <th>{{ $item->kategori->nama_kategori}}</th>
+                                    <th>{{ $item->ruangans->nama_ruang}}</th>
+                                    <th>{{ $item->sumber_barang}}</th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-body">
+                    <div class="page-heading">
+                        <h5>Ruangan</h5>
+                    </div>
+                    <table class="table table-striped" >
                         <thead>
                             <tr>
                                 <th>Kode Ruangan</th>
                                 <th>Nama Ruangan</th>
-                                <th>Lantai</th>
-                                <th>Aksi</th>
+                                <th>Lokasi</th>
                             </tr>
                         </thead>
-                            <tbody>
+                        <tbody>
+                            @foreach ($ruangan as $item)
                                 <tr>
-                                    <td>Graiden</td>
-                                    <td>Teknik Media Baru</td>
-                                    <td>1</td>
-                                    <td>
-                                        <span class="badge bg-success">Edit</span>
-                                    </td>
+                                    <th>{{ $item->kode_ruang}}</th>
+                                    <th>{{ $item->nama_ruang}}</th>
+                                    <th>Lantai {{ $item->lantai}}</th>
                                 </tr>
-                                <tr>
-                                    <td>Graiden</td>
-                                    <td>Teknik Media Baru</td>
-                                    <td>1</td>
-                                    <td>
-                                        <span class="badge bg-success">Edit</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>PPS</td>
-                                    <td>Penyiaran Berita</td>
-                                    <td>3</td>
-                                    <td>
-                                        <span class="badge bg-success">Edit</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>PPS</td>
-                                    <td>Penyiaran Berita</td>
-                                    <td>3</td>
-                                    <td>
-                                        <span class="badge bg-success">Edit</span>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="http://ahmadsaugi.com">nisa cans</a></p>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
   

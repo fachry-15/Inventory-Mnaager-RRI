@@ -15,12 +15,12 @@
             <div class="modal-body">
                 <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <!-- Nama Barang -->
-                    <div class="mb-3">
-                        <label for="InputName" class="form-label">Nama Barang</label>
-                        <input type="text" name="nama" class="form-control" id="InputName"
-                            placeholder="Masukkan Nama Barang" required>
-                    </div>
+                  <!-- Nama Barang -->
+<div class="mb-3">
+    <label for="InputName" class="form-label">Nama Barang</label>
+    <input type="text" name="nama" class="form-control" id="InputName"
+        placeholder="Masukkan Nama Barang" required>
+</div>
                     <div class="mb-3">
                         <label for="" class="form-label">Merek Barang</label>
                         <input type="text" name="merek" class="form-control" id=""
@@ -86,7 +86,9 @@
                         <label for="kantor" class="form-label">Kantor Pemilik Barang</label>
                         <select class="form-control" id="InputOffice" name="kantor" required>
                             <option value="" disabled selected>Pilih Kantor Pemilik Barang</option>
-                           <option value="LPP RRI Surabaya">LPP RRI Surabaya</option>
+                            @foreach ($kantor as $item)
+                                <option value="{{$item->nama_kantor}}">{{$item->nama_kantor}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
@@ -150,3 +152,25 @@
         document.getElementById('InputDateMaintenance').value = year + "-" + month + "-" + day;
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $("#InputName").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "{{ route('barang.nama') }}",
+                    dataType: "json",
+                    success: function(data) {
+                        response($.map(data, function(item) {
+                            return {
+                                label: item.nama,
+                                value: item.nama
+                            };
+                        }));
+                    }
+                });
+            },
+            minLength: 2
+        });
+    });
+    </script>

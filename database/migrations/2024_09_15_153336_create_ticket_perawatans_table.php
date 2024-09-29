@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('kode_ticket');
             $table->string('jenis_perawatan');
-            $table->string('barang_id');
-            $table->foreign('barang_id')->references('kode_barang')->on('barangs')->onDelete('cascade');
+            $table->foreignId('barang_id')->constrained('barangs')->onDelete('cascade');
+            $table->string('diagnosa');
             $table->string('deskripsi_perawatan');
-            $table->string('lampiran_file');
+            $table->string('lampiran_file')->nullable();
             $table->timestamps();
         });
     }

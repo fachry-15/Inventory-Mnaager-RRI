@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\BarangImport;
 use App\Models\barang;
+use App\Models\Kantor;
 use App\Models\Kategori;
 use App\Models\ruangan;
 use Exception;
@@ -26,6 +27,7 @@ class BarangController extends Controller
         // Mengambil semua data kategori dan ruangan
         $kategori = Kategori::all();
         $ruangans = Ruangan::all();
+        $kantor = Kantor::all();
 
         // Mengambil data barang dengan nama_barang yang unik saja
         $barangs = Barang::select('nama_barang', DB::raw('MIN(kategori_id) as kategori_id'), DB::raw('MIN(ruangan_id) as ruangan_id'), DB::raw('MIN(tanggal_masuk) as tanggal_masuk'))
@@ -39,7 +41,7 @@ class BarangController extends Controller
             ->get();
 
         // Mengirim data ke view
-        return view('barang', compact('barangs', 'kategori', 'ruangans', 'barangCounts'));
+        return view('barang', compact('barangs', 'kategori', 'ruangans', 'barangCounts', 'kantor'));
     }
 
     public function detailbarang($nama_barang)
@@ -62,6 +64,11 @@ class BarangController extends Controller
         //
     }
 
+    public function getBarang()
+    {
+        $barang = barang::select('nama_barang')->get();
+        return response()->json($barang);
+    }
     /**
      * Store a newly created resource in storage.
      *

@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\HomeControllers;
 use App\Http\Controllers\KantorControllers;
 use App\Http\Controllers\KaryawanControllers;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KembalikanControllers;
+use App\Http\Controllers\MaintenanceControllers;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PengambilanControllers;
 use App\Http\Controllers\PindahBarangController;
@@ -27,9 +29,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeControllers::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -67,6 +67,11 @@ Route::delete('DaftarKantor/{id}', [KantorControllers::class, 'destroy'])->name(
 Route::put('/kantor/update/{id}', [KantorControllers::class, 'update'])->name('kantor.update');
 Route::get('/api/kota', [KantorControllers::class, 'getKota']);
 
+Route::get('Maintenance', [MaintenanceControllers::class, 'index'])->name('maintenance');
+Route::get('/barang/nama', [BarangController::class, 'getBarang'])->name('barang.nama');
+Route::get('/barang/nama_barang', [MaintenanceControllers::class, 'getBarang'])->name('barang.nama');
+Route::post('/maintenance/store', [MaintenanceControllers::class, 'store'])->name('maintenance.store');
+
 
 Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 Route::delete('/ruangan/{id}', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
@@ -84,5 +89,7 @@ Route::get('PindahBarangMenu', [PindahBarangController::class, 'menu'])->name('p
 Route::get('PindahBarangOtomatis', [PindahBarangController::class, 'pindahotomatis'])->name('pindahbarangotomatis');
 Route::post('update-ruangan', [PindahBarangController::class, 'updateRuangan'])->name('update.ruangan');
 Route::get('/export-excel', [PengambilanControllers::class, 'exportExcel'])->name('export.excel');
+Route::get('ticketmaintenance/{id}', [PdfController::class, 'ticketmaintenance'])->name('ticketmaintenance');
+
 
 require __DIR__ . '/auth.php';
