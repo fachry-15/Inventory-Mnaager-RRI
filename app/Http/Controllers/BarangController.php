@@ -82,6 +82,7 @@ class BarangController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'required|string|max:255',
                 'merek' => 'required|string|max:255',
+                'tipe' => 'nullable|string|max:255',
                 'kategori' => 'required|integer',
                 'kode_barang' => 'required|string|max:255|unique:barangs,kode_barang',
                 'penanggungjawab' => 'required|string|max:255',
@@ -91,6 +92,11 @@ class BarangController extends Controller
                 'sumber' => 'required|string|max:255',
                 'kantor' => 'required|string|max:255',
                 'file' => 'nullable|file|mimes:pdf|max:2048',
+                'processor' => 'nullable|string|max:255',
+                'ram' => 'nullable|string|max:255',
+                'storage' => 'nullable|string|max:255',
+                'tahun' => 'nullable|integer',
+                'kondisi' => 'required|string|max:255',
             ]);
 
             // Upload gambar jika ada
@@ -137,6 +143,7 @@ class BarangController extends Controller
 
                 $validatedData['gambar'] = $imageName;
             }
+
             // Upload file lampiran jika ada
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
@@ -150,6 +157,7 @@ class BarangController extends Controller
             $barang = new Barang;
             $barang->nama_barang = $validatedData['nama'];
             $barang->merek = $validatedData['merek'];
+            $barang->tipe = $validatedData['tipe'] ?? null;
             $barang->kategori_id = $validatedData['kategori'];
             $barang->kode_barang = $validatedData['kode_barang'];
             $barang->penanggung_jawab = $validatedData['penanggungjawab'];
@@ -160,6 +168,11 @@ class BarangController extends Controller
             $barang->sumber_barang = $validatedData['sumber'];
             $barang->lokasi = $validatedData['kantor'];
             $barang->lampiran = $validatedData['file'] ?? null;
+            $barang->processor = $validatedData['processor'] ?? null;
+            $barang->ram = $validatedData['ram'] ?? null;
+            $barang->storage = $validatedData['storage'] ?? null;
+            $barang->tahun_perolehan = $validatedData['tahun'] ?? null;
+            $barang->kondisi = $validatedData['kondisi'];
             $barang->save();
 
             // Generate dan simpan barcode

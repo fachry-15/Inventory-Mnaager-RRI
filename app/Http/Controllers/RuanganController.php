@@ -61,7 +61,7 @@ class RuanganController extends Controller
             $ruangan->save();
 
             // Redirect to the index page or show a success message
-            return redirect()->route('dashboard')->with('success', 'Ruangan created successfully');
+            return back()->with('success', 'Ruangan created successfully');
         } catch (\Illuminate\Validation\ValidationException | \Exception $e) {
             Log::error($e->getMessage());
             return back()->with('error', 'Mohon Maaf, stok barang tidak mencukupi');
@@ -134,7 +134,7 @@ class RuanganController extends Controller
     {
         $ruangan = Ruangan::findOrFail($id);
         $ruangan->delete();
-    
+
         return back()->with('success', 'Ruangan berhasil dihapus');
     }
 }

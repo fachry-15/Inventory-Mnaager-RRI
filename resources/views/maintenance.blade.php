@@ -108,9 +108,9 @@
                                     <div class="card shadow-lg border-0 rounded-3">
                                         <div class="row g-0">
                                             <!-- Bagian Tanggal -->
-                                            <div class="col-4 bg-light text-center d-flex flex-column justify-content-center rounded-start">
-                                                <h2 class="mb-0 fw-bold">{{$item->created_at->format('d')}}</h2>
-                                                <span class="text-muted">{{$item->created_at->format('M')}}</span>
+                                            <div class="col-4 bg-{{ $item->jenis_perawatan == 'Perawatan' ? 'warning' : 'danger' }} text-center d-flex flex-column justify-content-center rounded-start">
+                                                <h2 class="mb-0 fw-bold text-white">{{$item->created_at->format('d')}}</h2>
+                                                <span class=" text-white">{{$item->created_at->format('M')}}</span>
                                             </div>
                                             <!-- Bagian Informasi -->
                                             <div class="col-8">
@@ -129,7 +129,7 @@
                                                     <!-- Tombol Aksi -->
                                                     <div class="d-flex justify-content-end">
                                                         <button class="btn btn-outline-{{ $item->jenis_perawatan == 'Perawatan' ? 'warning' : 'danger' }} btn-sm px-4 rounded-pill" data-bs-toggle="modal" data-bs-target="#staticBackdrop--{{$item->id}}">
-                                                            {{$item->jenis_perawatan}}
+                                                           Lihat Detail
                                                         </button>
                                                     </div>
                                                 </div>
@@ -177,6 +177,11 @@
                         <p class="card-text mb-3">
                             <strong>Utilitas :</strong><br>
                             <a href="{{ route('ticketmaintenance', $item->id) }}" class="btn btn-danger"><i class="fas fa-ticket-alt me-1"></i> Cetak Ticket</a>
+                            @if ($item->lampiran_file)
+                                <a href="{{ asset('storage/' . $item->lampiran_file) }}" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-file-pdf me-1"></i> Lihat Lampiran
+                                </a>
+                            @endif
                         </p>
                        
                     </div>

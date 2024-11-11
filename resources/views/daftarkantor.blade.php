@@ -100,6 +100,9 @@
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteKaryawan{{ $item->id }}">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
+                                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#mapModal" onclick="showMap('{{ $item->alamat_kantor }}')">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </button>
                                         </td>
                                     </tr>
 
@@ -172,12 +175,63 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- Modal for Map -->
+                <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="mapModalLabel">Lokasi Kantor</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="map" style="height: 500px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Modal for Map -->
             </div>
 
             @include('components.footer.footer')
         </div>
     </div>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     <script>
+        let map;
+        let geocoder;
+
+        function initMap() {
+            map = L.map('map').setView([-7.250445, 112.768845], 10); // Center map to Surabaya, Jawa Timur
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            geocoder = L.Control.Geocoder.nominatim();
+        }
+
+        function showMap(address) {
+            geocoder.geocode(address, function(results) {
+                if (results.length > 0) {
+                    const result = results[0];
+                    map.setView(result.center, 13);
+                    L.marker(result.center).addTo(map)
+                        .bindPopup(address)
+                        .openPopup();
+                } else {
+                    console.error('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             fetch('/api/kota')
                 .then(response => response.json())

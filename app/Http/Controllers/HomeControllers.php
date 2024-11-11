@@ -11,7 +11,7 @@ class HomeControllers extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *  
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -20,6 +20,7 @@ class HomeControllers extends Controller
         $kantor = Kantor::all();
         $ruangan = ruangan::all();
         $digunakan = barang::where('status', '1')->get();
+        $barangs = Barang::with(['kategori', 'ruangans'])->get();
         $barangs = Barang::with(['kategori', 'ruangans'])->get();
         return view('dashboard', compact('barang', 'kantor', 'ruangan', 'digunakan', 'barangs'));
     }

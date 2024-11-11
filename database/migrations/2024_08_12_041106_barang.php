@@ -17,12 +17,18 @@ return new class extends Migration
             $table->id();
             $table->string('nama_barang');
             $table->string('merek');
+            $table->string('tipe');
             $table->string('kode_barang')->unique();
+            $table->string('Processor')->nullable();
+            $table->integer('RAM')->nullable();
+            $table->integer('Storage')->nullable();
             $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
             $table->string('penanggung_jawab')->nullable();
             $table->foreignId('ruangan_id')->constrained('ruangans')->onDelete('cascade');
             $table->string('bukti_gambar')->nullable();
             $table->date('tanggal_masuk');
+            $table->integer('Tahun_perolehan')->nullable();
+            $table->string('kondisi')->nullable();
             $table->string('lokasi');
             $table->string('sumber_barang');
             $table->string('lampiran')->nullable();

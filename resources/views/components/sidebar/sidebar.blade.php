@@ -3,7 +3,7 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                    <a href="{{ route('dashboard') }}"> <img src="{{ asset('assets/images/logo/logoRRI.png') }}" alt="Logo" ></a>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -88,11 +88,14 @@
 
                 <li class="sidebar-title">Akun</li>
 
-                <li class="sidebar-item  ">
-                    <a href="table.html" class='sidebar-link'>
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </a>
+                <li class="sidebar-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{ route('logout') }}" class='sidebar-link' onclick="event.preventDefault(); this.closest('form').submit();">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </a>
+                    </form>
                 </li>
             </ul>
         </div>
